@@ -16,18 +16,10 @@ nucleotide with its complement:
 '''
 
 
-def to_rna(s):
-    t = ''
-    for c in s:
-        if c == 'G':
-            t += 'C'
-        elif c == 'C':
-            t += 'G'
-        elif c == 'T':
-            t += 'A'
-        elif c == 'A':
-            t += 'U'
-    return t
+def to_rna(dna):
+    dna_to_rna = {'G': 'C', 'C': 'G', 'T': 'A', 'A': 'U'}
+
+    return "".join([dna_to_rna[c] for c in dna.upper()])
 
 
 if __name__ == '__main__':
