@@ -1,5 +1,5 @@
-from datetime import date
-from calendar import monthrange
+import datetime
+import calendar
 
 weekday_token = {
     'Monday': 0,
@@ -11,32 +11,32 @@ weekday_token = {
     'Sunday': 6
     }
 
-match_token = {
+modifier_token = {
     '1st': 0,
     '2nd': 1,
     '3rd': 2,
     '4th': 3,
     '5th': 4,
     'last': -1,
-    'teenth': -2
+    'teenth': 100
     }
 
 
-def meetup_day(year=2000, month=1, weekday='Monday', match='1st'):
+def meetup_day(year=2000, month=1, weekday='Monday', modifier='1st'):
     weekday_value = weekday_token[weekday]
-    match_value = match_token[match]
+    modifier_value = modifier_token[modifier]
 
-    bom, days = monthrange(year, month)
-    firstmatch = (weekday_value - bom) % 7 + 1
-    match_range = range(firstmatch, days + 1, 7)
-    if match == 'teenth':
-        for day in match_range:
+    cal = calendar.monthcalendar(year, month)
+    col = [week[weekday_value] for week in cal if week[weekday_value] != 0]
+
+    if modifier == 'teenth':
+        for day in col:
             if day in range(13, 20):
                 break
     else:
-        day = match_range[match_value]
+        day = col[modifier_value]
 
-    return date(year, month, day)
+    return datetime.date(year, month, day)
 
 
 if __name__ == '__main__':
