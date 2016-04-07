@@ -25,12 +25,13 @@ match_token = {
 def meetup_day(year=2000, month=1, weekday='Monday', match='1st'):
     weekday_value = weekday_token[weekday]
     match_value = match_token[match]
+
     bom, days = monthrange(year, month)
     firstmatch = (weekday_value - bom) % 7 + 1
     match_range = range(firstmatch, days + 1, 7)
     if match == 'teenth':
         for day in match_range:
-            if 13 <= day and day <= 19:
+            if day in range(13, 20):
                 break
     else:
         day = match_range[match_value]
