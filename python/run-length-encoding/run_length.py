@@ -1,8 +1,7 @@
 def encode(s):
     r = ''
     f = 1
-    for i in range(len(s)):
-        c = s[i]
+    for i, c in enumerate(s):
         cnext = s[i + 1] if i < len(s) - 1 else ''
         if c == cnext:
             f += 1
@@ -10,9 +9,8 @@ def encode(s):
             if f == 1:
                 r += c
             else:
-                r += str(f)
-                r += c
-            f = 1
+                r += str(f) + c
+                f = 1
     return r
 
 
@@ -27,7 +25,7 @@ def decode(s):
                 r += c
             else:
                 r += c * f
-            f = 0
+                f = 0
     return r
 
 
