@@ -1,14 +1,12 @@
-def detect_anagrams(word, candidate_list):
-    r = []
-    wl = word.lower()
-    ws = ''.join(sorted(wl))
-    for candidate in candidate_list:
-        cl = candidate.lower()
-        if wl != cl:
-            if ws == ''.join(sorted(cl)):
-                r.append(candidate)
+def detect_anagrams(word, candidates):
+    return [candidate
+            for candidate in candidates
+            if _letters(candidate) == _letters(word)
+            if candidate.lower() != word.lower()]
 
-    return r
+
+def _letters(word):
+    return sorted(word.lower())
 
 
 if __name__ == '__main__':
