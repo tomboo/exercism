@@ -1,29 +1,29 @@
-class School():
+from collections import defaultdict
+
+
+class School(object):
     def __init__(self, name):
         self.name = name
-        self.roster = {}
+        self.db = defaultdict(set)
 
     def add(self, student, grade):
         '''Add a student's name to the roster for a grade'''
-        if grade not in self.roster.keys():
-            self.roster[grade] = []
-        self.roster[grade] += [student]
+        self.db[grade].add(student)
 
-    def grade(self, grade):
+    def grade(self, level):
         '''Get a list of all students enrolled in a grade'''
-        if grade not in self.roster.keys():
-            return []
-        return self.roster[grade]
+        return self.db[level]
 
     def sort(self):
         '''Get a sorted list of all students in all grades'''
-        grades = sorted(self.roster.keys())
-        return [grade for grade in grades]
+        return sorted((grade, tuple(sorted(students)))
+                      for grade, students in self.db.items())
 
 
 if __name__ == '__main__':
     school = School("Haleakala Hippy School")
     school.add('Annie', 2)
     school.add('Frank', 2)
+    school.add('Ken', 3)
     print(school.grade(2))
     print(school.sort())
