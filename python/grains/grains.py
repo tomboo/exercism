@@ -3,7 +3,7 @@ def on_square(square):
 
 
 def total_after(square):
-    return sum(on_square(n) for n in range(1, square + 1))
+    return sum(on_square(n + 1) for n in range(square))
 
 
 if __name__ == '__main__':
